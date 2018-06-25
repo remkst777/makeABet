@@ -1,8 +1,8 @@
 class homeCtrl {
-    constructor($scope) {
+    constructor($scope, $mdDialog) {
         'ngInject';
         console.log('homeCtrl');
-    }  
+    }
 }
 
 angular.module('app.home', []);

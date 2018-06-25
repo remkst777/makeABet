@@ -1,7 +1,7 @@
 {
   "name": "angularjs",
   "version": "2.0.0",
-  "description": "AngularJS aka Angular 1, ES6, Webpack Starter Kit Project which includes Bootstrap 4 also.",
+  "description": "AngularJS",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --progress --open",
@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "Hardik Kaji",
+  "author": "RomanRem",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.25.0",
@@ -34,6 +34,10 @@
   },
   "dependencies": {
     "angular": "^1.6.5",
+    "angular-animate": "^1.7.2",
+    "angular-aria": "^1.7.2",
+    "angular-material": "^1.1.9",
+    "angular-messages": "^1.7.2",
     "angular-ui-router": "^1.0.3",
     "bootstrap": "^4.1.1",
     "font-awesome": "4.7.0",

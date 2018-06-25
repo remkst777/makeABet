@@ -14,6 +14,18 @@ class appCtrl {
     }
 }
 
-angular.module('app', ['app.core', 'ui.router', 'app.header', 'app.home', 'app.play', 'app.statistics', 'app.about']);
-angular.module('app').controller('appCtrl', appCtrl);
+angular.module('app', [
+    'ngMaterial', 
+    'ngMessages', 
+    'app.core', 
+    'ui.router', 
+    'app.header',
+    'app.home', 
+    'app.play', 
+    'app.statistics', 
+    'app.about'
+]);
+
+angular.module('app')
+    .controller('appCtrl', appCtrl);
 
