@@ -1,7 +1,22 @@
 export default [
 	{
-		name: 'main',
+		name: 'home',
 		url: '/',
-		component: 'appMain'
+		component: 'home'
+	},
+    {
+		name: 'play',
+		url: '/play',
+		component: 'play'
+	},
+    {
+		name: 'statistics',
+		url: '/statistics',
+		component: 'statistics'
+	},
+    {
+		name: 'about',
+		url: '/about',
+		component: 'about'
 	}
 ];

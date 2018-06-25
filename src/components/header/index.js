@@ -1,12 +1,25 @@
 class headerCtrl {
-    constructor() {
+    constructor($scope, $timeout, $location) {
         'ngInject';
-        console.log('headerctrl')
+        this.$location = $location;
+        $timeout(() => this.top = 0);
+    }
+    
+    isTabActive(tab) {
+        if (this.$location.$$url === tab) 
+            return 'active-tab';
+    }
+    
+    chooseTab(tab) {
+        this.$location.path(tab);
     }
 }
 
 angular.module('app.header', []);
 angular.module('app.header').component('appHeader', {
         templateUrl: 'components/header/header.html',
-        controller: headerCtrl
+        controller: headerCtrl,
+        bindings: {
+            data: '='
+        }
 });

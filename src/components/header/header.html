@@ -1,1 +1,18 @@
-<h3>HEADER</h3>
+<header>
+    <div class="col-lg-offset-2 col-lg-8 head-cmp-center">
+       <div ng-click="$ctrl.chooseTab('/')"
+            class="{{$ctrl.isTabActive('/')}}" 
+            style="top: {{$ctrl.top}}; transition: 0.4s">HOME</div>
+       <div ng-click="$ctrl.chooseTab('/play')" 
+            class="{{$ctrl.isTabActive('/play')}}" 
+            style="top: {{$ctrl.top}}; transition: 0.6s">PLAY</div>
+       <div ng-click="$ctrl.chooseTab('/statistics')" 
+            class="{{$ctrl.isTabActive('/statistics')}}" 
+            style="top: {{$ctrl.top}}; transition: 0.8s">STATISTICS</div>
+       <div ng-click="$ctrl.chooseTab('/about')"
+            class="{{$ctrl.isTabActive('/about')}}"  
+            style="top: {{$ctrl.top}}; transition: 1s">ABOUT</div>
+       <div ng-click="$ctrl.login()"
+            style="top: {{$ctrl.top}}; transition: 1.2s">LOGIN</div>
+    </div>
+</header>
