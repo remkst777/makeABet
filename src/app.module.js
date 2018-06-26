@@ -9,7 +9,7 @@ class appCtrl {
     constructor($scope, userService) {
         'ngInject';
         $scope.data = {};
-        userService.get()
+        userService.find(`Items`, 100)
             .then((resp) => $scope.data.users = resp);
     }
 }

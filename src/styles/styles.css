@@ -1,7 +1,7 @@
 body {
-    background-image: linear-gradient(66deg, #20242f, #5a6c7a);
     font-family: Pompadur;
     color: #FFF;
+    background-image: linear-gradient(66deg, #20242f, #5a6c7a);
     padding: 0;
     margin: 0;
 }
@@ -14,6 +14,99 @@ body {
 header {
     background-color: #191E28 !important;
     height: 90px;
+}
+
+.wrapper-wrap {
+    background-image: linear-gradient(66deg, #20242f, #5a6c7a);
+    min-height: calc(100% - 90px);
+    padding: 15px 0;
+}
+
+.wrapper-wrap:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.modal-window-bg {
+    position: absolute;
+    top: 150px;
+    width: 450px;
+    min-height: 200px;
+}
+
+.active-cursor {
+    cursor: pointer;
+}
+
+.active-cursor:hover {
+    color: rgb(63, 81, 181);
+}
+
+.forgot_create_modal * {
+    padding-right: 5px;
+}
+
+.modal-window-content {
+    padding: 20px 40px;
+}
+
+.modal-window-content > div {
+    margin-top: 5px;
+}
+
+.modal-window-content {
+    font-size: 13px !important;
+    font-weight: 700;
+    color: rgba(2, 2, 2, 0.56);
+}
+
+.modal-window-content input[type="checkbox"] {
+    width: 13px;
+    height: 13px;
+    min-height: 13px;
+    cursor: pointer;
+    vertical-align: -3px;
+}
+
+.modal-window-content .md-raised {
+    float: right;
+    margin: 0;
+}
+
+.alertify-notifier {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}
+
+.alertify-notifier > div {
+    margin: 2px 0;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 15px;
+    width: 250px;
+    text-align: center;
+    text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.5);
+    min-height: 60px;
+}
+
+.alertify-notifier .ajs-success {
+    background-color: rgba(91, 189, 114, 0.95);
+}
+
+.alertify-notifier .ajs-error {
+    background-color: rgba(217, 92, 92, 0.95);
+}
+
+.modal-window-content input {
+    border-radius: 4px;
+    min-height: 40px;
+    margin: 6px 0;
+    font-size: 13px;
+    color: #9196A1;
+    border: 1px solid #9196A1;
+    box-shadow: 0 0 1px #9196A1;
 }
 
 .head-cmp-center {

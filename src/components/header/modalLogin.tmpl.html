@@ -1,6 +1,56 @@
-<md-dialog class="col-xs-6">
-  <h3>MODAL WINDOW DIALOG</h3>
-  <h3>MODAL WINDOW DIALOG</h3>
-  <h3>MODAL WINDOW DIALOG</h3>
-  <h3>MODAL WINDOW DIALOG</h3>
+<md-dialog class="modal-window-bg">
+  
+    <md-toolbar md-scroll-shrink>
+        <div class="md-toolbar-tools">
+            <h3>
+                <span ng-if="showContent(1)">Authorization window</span>
+                <span ng-if="showContent(2)">Forgot password?</span>
+                <span ng-if="showContent(3)">Create account</span>
+            </h3>
+        </div>
+    </md-toolbar>
+  
+    <form name="authForm" class="modal-window-content">
+        <input class="form-control" 
+               type="email" 
+               ng-model="data.auth.login"
+               ng-required="true"
+               placeholder="Login">
+               
+        <input class="form-control" 
+               type="password"
+               ng-model="data.auth.password"
+               ng-if="!showContent(2)"
+               ng-required="true"
+               minlength="5"
+               placeholder="Password">
+        <div>
+            <input ng-model="data.auth.checkbox"
+                   ng-if="showContent(1)"
+                   type="checkbox"> 
+                   
+            <span class="active-cursor" 
+                  ng-if="showContent(1)"
+                  ng-click="data.auth.checkbox = !data.auth.checkbox">Remember me</span>
+                  
+            <md-button ng-click="formSubmit('okay')" 
+                       type="submit"
+                       ng-disabled="authForm.$submitted"
+                       class="md-raised md-primary">{{authForm.$submitted ? 'Loading...' : 'Submit'}}</md-button>
+        </div>
+        <div class="forgot_create_modal">
+            <span ng-show="!showContent(1)" 
+                  ng-click="changeTab(1)" 
+                  class="active-cursor">Login</span>
+                  
+            <span ng-show="!showContent(2)" 
+                  ng-click="changeTab(2)" 
+                  class="active-cursor">Forgot password?</span>
+                  
+            <span ng-show="!showContent(3)" 
+                  ng-click="changeTab(3)" 
+                  class="active-cursor">Create account</span>
+        </div>
+    </form>
+  
 </md-dialog>
