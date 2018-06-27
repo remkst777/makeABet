@@ -51,7 +51,8 @@ class headerCtrl {
                 };
                 
                 $scope.toRecoverPassword = (login) => {
-                    console.log('recover');
+                    this.userService.restorePassword(login)
+                        .then(() => $scope.authForm.$submitted = false);
                 };
                 
                 $scope.toRegisterUser = (login, password) => {

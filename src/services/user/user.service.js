@@ -75,4 +75,19 @@ export default class UserService {
             })
     }
     
+    restorePassword = (login) => {
+        let query = ``;
+        query += `${this.backendlessUrl}`;
+        query += `/users/restorepassword/${login}`;
+        return this.$http.get(query)
+            .then((data) => {
+                alertify.success('Go to  your email and confirm address!');
+                return data;
+            })
+            .catch((error) => {
+                alertify.error(error.data.message ? error.data.message : error.data);
+                return error;
+            })
+    }
+    
 }
