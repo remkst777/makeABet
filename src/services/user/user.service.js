@@ -36,11 +36,11 @@ export default class UserService {
             })
     }
     
-    login = (login, password) => {
+    getById = (table, objectId) => {
         let query = ``;
-        query += `${this.backendlessUrl}`;
-        query += `/users/login`;
-        return this.$http.post(query, { login, password })
+        query += `${this.backendlessUrl}/data`;
+        query += `/${table}/${objectId}`;
+        return this.$http.get(query)
             .then((data) => data)
             .catch((error) => {
                 alertify.error(error.data.message ? error.data.message : error.data);
@@ -48,5 +48,31 @@ export default class UserService {
             })
     }
     
+    login = (login, password) => {
+        let query = ``;
+        query += `${this.backendlessUrl}`;
+        query += `/users/login`;
+        return this.$http.post(query, { login, password })
+            .then((data) => {
+                Backendless.UserService.login(login, password, true);
+                return data;
+            })
+            .catch((error) => {
+                alertify.error(error.data.message ? error.data.message : error.data);
+                return error;
+            })
+    }
+    
+    logout = () => {
+        let query = ``;
+        query += `${this.backendlessUrl}`;
+        query += `/users/logout`;
+        return this.$http.get(query)
+            .then((data) => data)
+            .catch((error) => {
+                alertify.error(error.data.message ? error.data.message : error.data);
+                return error;
+            })
+    }
     
 }

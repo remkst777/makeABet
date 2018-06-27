@@ -1,9 +1,10 @@
 class headerCtrl {
-    constructor($scope, $timeout, $location, $mdDialog, userService) {
+    constructor($scope, $timeout, $location, $mdDialog, userService, cookieService) {
         'ngInject';
-        this.$location   = $location;
-        this.$mdDialog   = $mdDialog;
-        this.userService = userService;
+        this.$location     = $location;
+        this.$mdDialog     = $mdDialog;
+        this.userService   = userService;
+        this.cookieService = cookieService;
         
         $timeout(() => this.top = 0);
     }
@@ -41,6 +42,9 @@ class headerCtrl {
                             if (data.status !== 200) {
                                 $scope.authForm.$submitted = false;
                             } else {
+                                const PERIOD = checkbox ? (3600 * 24 * 365) : 1800;
+                                this.cookieService.setCookie(`objectId`, `${data.data.objectId}`, PERIOD);
+                                this.data.userProfile = data.data;
                                 this.$mdDialog.hide();
                             }
                         })
@@ -74,6 +78,12 @@ class headerCtrl {
             clickOutsideToClose: true
         });
     };
+    
+    toLogOut(event) {
+        this.data.userProfile = {};
+        this.userService.logout();
+        this.cookieService.deleteCookie(`objectId`);
+    }
     
     isTabActive(tab) {
         if (this.$location.$$url === tab) 

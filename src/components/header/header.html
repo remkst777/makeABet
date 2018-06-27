@@ -16,7 +16,10 @@
             class="{{$ctrl.isTabActive('/about')}}"  
             style="top: {{$ctrl.top}}; transition: 1s">ABOUT</div>
             
-       <div ng-click="$ctrl.toLogIn($event)"
-            style="top: {{$ctrl.top}}; transition: 1.2s">LOGIN</div>
+       <div ng-click="$ctrl.data.userProfile.objectId ? $ctrl.toLogOut($event) : $ctrl.toLogIn($event)"
+            ng-style="$ctrl.data.userProfile.objectId && {color: '#32CD32'}"
+            style="top: {{$ctrl.top}}; transition: 1.2s">
+            {{$ctrl.data.userProfile.objectId ? 'LOGOUT' : 'LOGIN'}}
+       </div>
     </div>
 </header>
