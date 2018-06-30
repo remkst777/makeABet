@@ -1,5 +1,40 @@
 <div class="wrapper-wrap">
-    <div class="col-lg-offset-2 col-lg-8">
-        {{$ctrl.data}}
+    <div class="col-lg-offset-2 col-lg-8 home">
+        <h3>{{$ctrl.data.userProfile.stadiumName ? $ctrl.data.userProfile.stadiumName : 'Start playing!'}}</h3>
+        <span class="stadium-image"
+              style="background-image: url({{$ctrl.data.userProfile.stadiumImage ? 
+                                             $ctrl.data.userProfile.stadiumImage : 
+                                             $ctrl.stadiumImage}})">
+            <span class="email_coins">
+                {{$ctrl.data.userProfile.email ? 
+                  $ctrl.data.userProfile.email + ', ' + 
+                  $ctrl.data.userProfile.coins + '$' : '0$'}}</span>
+            <span ng-repeat="row in $ctrl.data.structureConfig"
+                  class="structure-object {{row[$ctrl.data.userProfile.structureConfig[$index + 1]] ? 'active-bg' : 'disable-bg'}}"
+                  title="{{ row[$ctrl.data.userProfile.structureConfig[$index + 1]] ?          row[$ctrl.data.userProfile.structureConfig[$index + 1]].description :
+                  row[row.length - 1].description }}"
+                  ng-click="row[$ctrl.data.userProfile.structureConfig[$index + 1]] && $ctrl.getConstruction(row, $index + 1, $event)">
+                  <div>
+                      <img src="{{row[$ctrl.data.userProfile.structureConfig[$index + 1] - 1].image}}" alt=""
+                           style="position: absolute; 
+                                  top: {{row[$ctrl.data.userProfile.structureConfig[$index + 1] - 1].yPosition_img}}; 
+                                  left: {{row[$ctrl.data.userProfile.structureConfig[$index + 1] - 1].xPosition_img}}">
+                  </div>
+                  <p>
+                      {{ 
+                          row[$ctrl.data.userProfile.structureConfig[$index + 1]] ? 
+                          row[$ctrl.data.userProfile.structureConfig[$index + 1]].name :
+                          row[row.length - 1].name 
+                      }}
+                  </p>
+                  <p>
+                     {{ 
+                         row[$ctrl.data.userProfile.structureConfig[$index + 1]] ? 
+                         row[$ctrl.data.userProfile.structureConfig[$index + 1]].cost + '$, Level: ' + row[$ctrl.data.userProfile.structureConfig[$index + 1]].level : 
+                         row[row.length - 1].cost + '$, Level: ' + row[row.length - 1].level
+                     }}
+                  </p>
+            </span>         
+        </span>
     </div>
 </div>

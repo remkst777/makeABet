@@ -16,22 +16,23 @@ export default class UserService {
         return this.$http.get(query)
             .then((data) => data)
             .catch((error) => {
-                alertify.error(error.data.message ? error.data.message : error.data);
+                alertify.error(error.data && error.data.message ? error.data.message : error.data ? error.data : 'Check Internet connection');
                 return error;
             })
     }
     
     register = (email, password) => {
         let query = ``;
+        const stadiumImage = `https://develop.backendless.com/0FC174F8-1D3A-699D-FF9A-12DA40395200/console/utdsmulpcvjuejnwwelckudnjokwqutyygvw/files/view/images/stadiums/stadium0.png`;
         query += `${this.backendlessUrl}`;
         query += `/users/register`;
-        return this.$http.post(query, { email, password })
+        return this.$http.post(query, { email, password, stadiumImage })
             .then((data) => {
                 alertify.success(`Created with success!`)
                 return data;
             })
             .catch((error) => {
-                alertify.error(error.data.message ? error.data.message : error.data);
+                alertify.error(error.data && error.data.message ? error.data.message : error.data ? error.data : 'Check Internet connection');
                 return error;
             })
     }
@@ -43,7 +44,7 @@ export default class UserService {
         return this.$http.get(query)
             .then((data) => data)
             .catch((error) => {
-                alertify.error(error.data.message ? error.data.message : error.data);
+                alertify.error(error.data && error.data.message ? error.data.message : error.data ? error.data : 'Check Internet connection');
                 return error;
             })
     }
@@ -58,7 +59,7 @@ export default class UserService {
                 return data;
             })
             .catch((error) => {
-                alertify.error(error.data.message ? error.data.message : error.data);
+                alertify.error(error.data && error.data.message ? error.data.message : error.data ? error.data : 'Check Internet connection');
                 return error;
             })
     }
@@ -70,7 +71,7 @@ export default class UserService {
         return this.$http.get(query)
             .then((data) => data)
             .catch((error) => {
-                alertify.error(error.data.message ? error.data.message : error.data);
+                alertify.error(error.data && error.data.message ? error.data.message : error.data ? error.data : 'Check Internet connection');
                 return error;
             })
     }
@@ -85,7 +86,7 @@ export default class UserService {
                 return data;
             })
             .catch((error) => {
-                alertify.error(error.data.message ? error.data.message : error.data);
+                alertify.error(error.data && error.data.message ? error.data.message : error.data ? error.data : 'Check Internet connection');
                 return error;
             })
     }

@@ -8,5 +8,8 @@ class playCtrl {
 angular.module('app.play', []);
 angular.module('app.play').component('play', {
     templateUrl: 'components/play/play.html',
-    controller: playCtrl
+    controller: playCtrl,
+    bindings: {
+        data: '='
+    }
 })

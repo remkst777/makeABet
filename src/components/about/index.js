@@ -1,4 +1,4 @@
-class aboutCtrl {
+export default class aboutCtrl {
     constructor($scope) {
         'ngInject';
         console.log('aboutCtrl');

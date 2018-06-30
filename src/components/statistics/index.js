@@ -8,5 +8,8 @@ class statisticsCtrl {
 angular.module('app.statistics', []);
 angular.module('app.statistics').component('statistics', {
     templateUrl: 'components/statistics/statistics.html',
-    controller: statisticsCtrl
+    controller: statisticsCtrl,
+    bindings: {
+        data: '='
+    }
 })

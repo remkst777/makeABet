@@ -1,4 +1,4 @@
-class headerCtrl {
+export default class headerCtrl {
     constructor($scope, $timeout, $location, $mdDialog, userService, cookieService) {
         'ngInject';
         this.$location     = $location;
@@ -19,7 +19,7 @@ class headerCtrl {
         this.$mdDialog.show({
             controller: ($scope) => {
                 'ngInject';
-
+                    
                 $scope.tab = 1;
                 $scope.data = this.data;
                 $scope.data.auth = {};
