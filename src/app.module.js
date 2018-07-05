@@ -6,7 +6,7 @@ import './components/about';
 import './components/header';
 import './components/statistics';
 
-class appCtrl {
+export default class appCtrl {
     constructor($scope, userService, cookieService) {
         'ngInject';
         $scope.data = {

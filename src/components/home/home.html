@@ -2,9 +2,10 @@
     <div class="col-lg-offset-2 col-lg-8 home">
         <h3>{{$ctrl.data.userProfile.stadiumName ? $ctrl.data.userProfile.stadiumName : 'Start playing!'}}</h3>
         <span class="stadium-image"
-              style="background-image: url({{$ctrl.data.userProfile.stadiumImage ? 
+              style="opacity: {{ !$ctrl.loading ? 1 : 0 }}; 
+                     background-image: url({{ $ctrl.data.userProfile.stadiumImage ? 
                                              $ctrl.data.userProfile.stadiumImage : 
-                                             $ctrl.stadiumImage}})">
+                                             $ctrl.stadiumImage }})">
             <span class="email_coins">
                 {{$ctrl.data.userProfile.email ? 
                   $ctrl.data.userProfile.email + ', ' + 
@@ -34,7 +35,12 @@
                          row[row.length - 1].cost + '$, Level: ' + row[row.length - 1].level
                      }}
                   </p>
-            </span>         
+            </span>   
+            <span class="progress_bar">
+                <span class="progress_bar_filling" 
+                      title="{{$ctrl.countProgress()}}%"                
+                      style="width: {{$ctrl.countProgress()}}%"></span>
+            </span>      
         </span>
     </div>
 </div>

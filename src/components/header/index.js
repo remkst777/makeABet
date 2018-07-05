@@ -57,7 +57,7 @@ export default class headerCtrl {
                 
                 $scope.toRegisterUser = (login, password) => {
                     this.userService.register(login, password)
-                        .then((data) => {
+                        .then(() => {
                             $scope.authForm.$submitted = false;
                             $scope.data.auth = {};   
                             $scope.tab = 1;
@@ -81,7 +81,7 @@ export default class headerCtrl {
     };
     
     toLogOut(event) {
-        this.data.userProfile = {};
+        this.data = {};
         this.userService.logout();
         this.cookieService.deleteCookie(`objectId`);
     }

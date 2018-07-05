@@ -5,6 +5,10 @@ export default class UserService {
         this.backendlessUrl = `${Backendless.serverURL}/${Backendless.applicationId}/${Backendless.secretKey}`;
 	}
     
+    save = (table, obj) => {
+        return Backendless.Data.of(table).save(obj);
+    }
+    
     find = (table, pageSize = 10, offset = 0, sortBy = ``, whereClause = ``) => {
         let query = ``;
         query += `${this.backendlessUrl}/data`;

@@ -1,8 +1,27 @@
 class homeCtrl {
-    constructor($scope, $mdDialog) {
+    constructor($scope, $mdDialog, $timeout, userService, cookieService) {
         'ngInject';
         this.$mdDialog = $mdDialog;
+        this.$timeout = $timeout;
+        this.userService = userService;
+        this.cookieService = cookieService;
         this.stadiumImage = 'https://develop.backendless.com/0FC174F8-1D3A-699D-FF9A-12DA40395200/console/utdsmulpcvjuejnwwelckudnjokwqutyygvw/files/view/images/stadiums/stadium88.jpg';
+    }
+    
+    countProgress() {
+        let progress_current = 0,
+            progress_total = 0;
+        
+        angular.forEach(this.data.structureConfig, (item, key) => {
+            angular.forEach(item, (it, ix) => {
+                progress_total += it.cost;
+                if (it.level <= this.data.userProfile.structureConfig[key]) {
+                    progress_current += it.cost;
+                }
+            })
+        })
+        
+        return (progress_current / progress_total) * 100;
     }
     
     getConstruction(row, id, ev) {
@@ -16,9 +35,15 @@ class homeCtrl {
 
         this.$mdDialog.show(confirm)
             .then(() => { 
+                this.loading = true;
                 if (this.data.userProfile.coins >= row[NEW_LVL].cost) {
                     this.data.userProfile.structureConfig[id] += 1 ;
                     this.data.userProfile.coins -= row[NEW_LVL].cost;
+                    this.userService.save(`Users`, {
+                        objectId: this.cookieService.getCookie(`objectId`),
+                        structureConfig: JSON.stringify(this.data.userProfile.structureConfig),
+                        coins: this.data.userProfile.coins
+                    });
                 } else {
                     this.$mdDialog.show(
                       this.$mdDialog.alert()
@@ -30,6 +55,7 @@ class homeCtrl {
                         .targetEvent(ev)
                     );
                 }
+                this.$timeout(() => this.loading = false, 250);
         });
     }
     
