@@ -1,6 +1,6 @@
 <md-dialog class="modal-window-bg-play">
-    <p style="display: flex; justify-content: flex-end">
-        <strong style="padding-right: 2px">Coins:</strong> {{ data.userProfile.coins - BET }}$
+    <p style="display: flex; justify-content: flex-end; opacity: {{ loader ? 0 : 1 }}">
+        <strong style="padding-right: 2px">Coins:</strong> {{ data.userProfile.coins }}$
     </p>
     <table class="table">
         <thead>
@@ -58,6 +58,6 @@
         </tbody>
     </table>
     <md-button class="md-raised md-primary"
-               ng-disabled="!RADIO || !BET || BET > data.userProfile.coins"
-               ng-click="closeDialog(RADIO, BET, TEAM)">Bet</md-button>
+               ng-disabled="!RADIO || !BET || BET > data.userProfile.coins || loader"
+               ng-click="closeDialog(RADIO, BET, TEAM)">{{ loader ? 'Calculating...' : 'Bet' }}</md-button>
 </md-dialog>

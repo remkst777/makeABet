@@ -28,13 +28,25 @@ class playCtrl {
                 $scope.data = this.data;
                 
                 $scope.closeDialog = (num, sum, team) => {
-                    this.data.userProfile.coins -= sum;
                     match.BET = { 
                         num, sum, team,
                         coef: match.COEF[num],
                         gain: sum * match.COEF[num]
                     };
-                    this.$mdDialog.hide();
+                    
+                    this.calcCount(match);
+                    
+                    $scope.loader = true;
+                    this.$timeout(() => {
+                        this.userService.save(`Users`, {
+                            objectId: this.cookieService.getCookie(`objectId`),
+                            coins: this.data.userProfile.coins
+                        })
+                        .then(() => {
+                            $scope.loader = false;
+                            this.$mdDialog.hide()
+                        });
+                    }, 1000);
                 }
                 
             },
@@ -43,6 +55,29 @@ class playCtrl {
             targetEvent: event,
             clickOutsideToClose: true
         });
+    }
+    
+    calcCount(match) {
+        const A1 = 1.2 * match[0].attackPower / match[1].defensePower,
+              B1 = Math.random()*(2 * A1) - A1,
+              C1 = Math.floor(A1 * (A1 + B1/2));
+        const A2 = match[1].attackPower / match[0].defensePower,
+              B2 = Math.random()*(2 * A2) - A2,
+              C2 = Math.floor(A2 * (A2 + B2/2));
+    
+        const choice = match.BET.num;
+        match.isBetWon = (choice === 1 && C1 > C2 || choice === 2 && C1 === C2 || choice === 3 && C1 < C2) ? true : false;
+        match.status = 'Finished';
+        match.RESULTS = {
+            0: C1,
+            1: C2
+        };
+        
+        if (match.isBetWon) {
+            this.data.userProfile.coins += Math.floor(match.BET.gain - match.BET.sum);
+        } else {
+            this.data.userProfile.coins -= Math.floor(match.BET.sum);
+        }
     }
     
     countCoefficients(match) {
@@ -80,6 +115,11 @@ class playCtrl {
                 0: teams[nums[0]], 
                 1: teams[nums[1]] 
             });
+            this.matches[i].status = `Not started`;
+            this.matches[i].RESULTS = {
+                0: 0,
+                1: 0
+            };
             this.countCoefficients(this.matches[i]);
         }
     }
