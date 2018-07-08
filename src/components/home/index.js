@@ -8,6 +8,17 @@ class homeCtrl {
         this.stadiumImage = 'https://develop.backendless.com/0FC174F8-1D3A-699D-FF9A-12DA40395200/console/utdsmulpcvjuejnwwelckudnjokwqutyygvw/files/view/images/stadiums/stadium88.jpg';
     }
     
+    $onInit() {
+        this.data.userProfile.structureConfig = {};
+        if (this.cookieService.getCookie(`objectId`)) {
+            this.userService.getById(`users`, this.cookieService.getCookie(`objectId`))
+                .then((userProfile) => {
+                    userProfile.data.structureConfig = JSON.parse(userProfile.data.structureConfig);
+                    angular.extend(this.data.userProfile, userProfile.data);
+                });    
+        }
+    }
+    
     countProgress() {
         let progress_current = 0,
             progress_total = 0;

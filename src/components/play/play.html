@@ -1,5 +1,37 @@
 <div class="wrapper-wrap">  
-    <div class="col-xs-offset-2 col-xs-8">
-        {{$ctrl.data}}
+    <div class="col-lg-offset-2 col-lg-8 play">
+        <ul class="matches-container">
+            <li ng-repeat="match in $ctrl.matches"
+                style="cursor: {{ match.BET ? 'not-allowed' : 'pointer' }}"
+                title="{{ match.BET ? 'Bet is already done' : 'Do bet' }}"
+                ng-click="!match.BET ? $ctrl.openDialog($event, match) : null">
+                <div>
+                    <img ng-src="{{ match[0].teamImage }}" alt="">
+                    <span class="team-name">{{ match[0].name }}</span>
+                </div>
+                <div>
+                    <div class="count">
+                        <i class="team-1">0</i>
+                        <i>:</i>
+                        <i class="team-2">0</i>
+                    </div>
+                    <div>Not started</div>
+                    <div class="koef">
+                        <span ng-show="match.BET">
+                            Bet: {{ match.BET.sum }}$, {{ match.BET.team }} ({{ match.BET.coef | number:2 }});
+                        </span>
+                        <span ng-show="!match.BET">
+                            H: {{ match.COEF[1] | number:2 }}, 
+                            D:  {{ match.COEF[2] | number:2 }}, 
+                            A: {{ match.COEF[3] | number:2 }}
+                        </span>
+                    </div>
+                </div>
+                <div>
+                    <span class="team-name">{{ match[1].name }}</span>
+                    <img ng-src="{{ match[1].teamImage }}" alt="">
+                </div>
+            </li>
+        </ul>
     </div>
 </div>

@@ -11,9 +11,21 @@ body {
     src: url(fonts/SF_reg/SanFranciscoReg.otf)
 }
 
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
 header {
     background-color: #191E28 !important;
     height: 90px;
+}
+
+li {
+    list-style: none;
 }
 
 .wrapper-wrap {
@@ -140,6 +152,7 @@ header {
 
 .wrapper-wrap .home h3 {
     text-align: center;
+    margin: 10px;
 }
 
 .stadium-image {
@@ -225,3 +238,88 @@ header {
     font-size: 12px;
     color: rgb(50, 205, 50);
 }
+
+/*-------------------------------------------------------------------------------------*/
+
+.matches-container li {
+    display: flex;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.matches-container li > div {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.matches-container li > div:nth-child(2) {
+    justify-content: center;
+    flex-direction: column;
+}
+
+.matches-container li > div:nth-child(3) {
+    justify-content: flex-end;
+}
+
+.matches-container img {
+    position: relative;
+    z-index: 1;
+    border-radius: 50%;
+    box-shadow: 0 0 4px cyan;
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    background: #FFF;
+}
+
+.matches-container .count {
+    padding-top: 10px;
+}
+
+.matches-container .count i {
+    font-style: normal;
+    font-size: 32px;
+}
+
+.matches-container .koef {
+    font-size: 11px;
+}
+
+.matches-container .team-name {
+    font-size: 15px;
+    background: #4682b4;
+    padding: 3px 18px;
+    border-radius: 10px;
+    box-shadow: 0 0 4px cyan;
+    color: lightcyan;
+    flex-basis: 250px;
+}
+
+.matches-container li > div:nth-child(1) span {
+    position: relative;
+    left: -10px;
+}
+
+.matches-container li > div:nth-child(3) span {
+    position: relative;
+    left: 10px;
+    text-align: right;
+}
+
+.modal-window-bg-play {
+    padding: 15px 25px;
+}
+
+.modal-window-bg-play table {
+    color: #000;
+    font-size: 13px;
+    text-align: center;
+}
+
+.modal-window-bg-play table input[type="number"] {
+    width: 100px;
+    height: 25px;
+}
+
+

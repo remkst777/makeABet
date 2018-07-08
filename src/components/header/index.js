@@ -1,10 +1,11 @@
 export default class headerCtrl {
-    constructor($scope, $timeout, $location, $mdDialog, userService, cookieService) {
+    constructor($scope, $timeout, $location, $mdDialog, userService, cookieService, $window) {
         'ngInject';
         this.$location     = $location;
         this.$mdDialog     = $mdDialog;
         this.userService   = userService;
         this.cookieService = cookieService;
+        this.$window = window;
         
         $timeout(() => this.top = 0);
     }
@@ -45,6 +46,7 @@ export default class headerCtrl {
                                 const PERIOD = checkbox ? (3600 * 24 * 365) : 1800;
                                 this.cookieService.setCookie(`objectId`, `${data.data.objectId}`, PERIOD);
                                 this.data.userProfile = data.data;
+                                this.$window.location.reload();
                                 this.$mdDialog.hide();
                             }
                         })

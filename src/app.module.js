@@ -27,12 +27,7 @@ export default class appCtrl {
         if (!this.cookieService.getCookie(`objectId`)) {
             this.userService.logout();
         } else {
-            this.userService.getById(`users`, this.cookieService.getCookie(`objectId`))
-                .then((userProfile) => {
-                    userProfile.data.structureConfig = JSON.parse(userProfile.data.structureConfig);
-                    angular.extend(this.data.userProfile, userProfile.data);
-                    this.initLoading();
-                });
+            this.initLoading();
         }
     }
     
@@ -41,6 +36,8 @@ export default class appCtrl {
     */
     
     initLoading() {
+        this.userService.find(`teams`, 100)
+            .then((teams) => this.data.teams = teams.data);
         this.userService.find(`structure`, 100)
             .then((structureConfig) => { 
                 structureConfig.data = _.sortBy(structureConfig.data, (item) => item.level);

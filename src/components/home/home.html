@@ -16,7 +16,7 @@
                   row[row.length - 1].description }}"
                   ng-click="row[$ctrl.data.userProfile.structureConfig[$index + 1]] && $ctrl.getConstruction(row, $index + 1, $event)">
                   <div>
-                      <img src="{{row[$ctrl.data.userProfile.structureConfig[$index + 1] - 1].image}}" alt=""
+                      <img ng-src="{{row[$ctrl.data.userProfile.structureConfig[$index + 1] - 1].image}}" alt=""
                            style="position: absolute; 
                                   top: {{row[$ctrl.data.userProfile.structureConfig[$index + 1] - 1].yPosition_img}}; 
                                   left: {{row[$ctrl.data.userProfile.structureConfig[$index + 1] - 1].xPosition_img}}">
@@ -38,8 +38,8 @@
             </span>   
             <span class="progress_bar">
                 <span class="progress_bar_filling" 
-                      title="{{$ctrl.countProgress()}}%"                
-                      style="width: {{$ctrl.countProgress()}}%"></span>
+                      title="{{ $ctrl.countProgress() | number:2 }}%"                
+                      style="width: {{ $ctrl.countProgress() }}%"></span>
             </span>      
         </span>
     </div>

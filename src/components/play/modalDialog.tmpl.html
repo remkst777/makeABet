@@ -1,0 +1,63 @@
+<md-dialog class="modal-window-bg-play">
+    <p style="display: flex; justify-content: flex-end">
+        <strong style="padding-right: 2px">Coins:</strong> {{ data.userProfile.coins - BET }}$
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <td>#</td>
+                <td>Choice</td>
+                <td>Index</td>
+                <td>Bet</td>
+                <td style="min-width: 100px">Gain</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-click="RADIO = 1; TEAM = match[0].name">
+                <td>
+                    <input type="radio" 
+                           ng-checked="RADIO === 1 ? true : false">
+                </td>
+                <td>{{ match[0].name }}</td>
+                <td>{{ match.COEF[1] | number:2 }}</td>
+                <td>
+                    <input class="form-control" 
+                           ng-model="BET"
+                           type="number">
+                </td>
+                <td>{{ BET * match.COEF[1] | number:2 }}</td>
+            </tr>
+            <tr ng-click="RADIO = 2; TEAM = 'Draw'" >
+                <td>
+                    <input type="radio" 
+                           ng-checked="RADIO === 2 ? true : false">
+                </td>
+                <td>Draw</td>
+                <td>{{ match.COEF[2] | number:2 }}</td>
+                <td>
+                    <input class="form-control" 
+                           ng-model="BET"
+                           type="number">
+                </td>
+                <td>{{ BET * match.COEF[2] | number:2 }}</td>
+            </tr>
+            <tr ng-click="RADIO = 3; TEAM = match[1].name">
+                <td>
+                    <input type="radio" 
+                           ng-checked="RADIO === 3 ? true : false">
+                </td>
+                <td>{{ match[1].name }}</td>
+                <td>{{ match.COEF[3] | number:2 }}</td>
+                <td>
+                    <input class="form-control"
+                           ng-model="BET"
+                           type="number">
+                </td>
+                <td>{{ BET * match.COEF[3] | number:2 }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <md-button class="md-raised md-primary"
+               ng-disabled="!RADIO || !BET || BET > data.userProfile.coins"
+               ng-click="closeDialog(RADIO, BET, TEAM)">Bet</md-button>
+</md-dialog>
