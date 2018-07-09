@@ -6,7 +6,7 @@
                 title="{{ match.BET ? 'Bet is already done' : 'Do bet' }}"
                 ng-click="!match.BET ? $ctrl.openDialog($event, match) : null">
                 <div>
-                    <img ng-src="{{ match[0].teamImage }}" alt="">
+                    <img style="background-image: url({{ match[0].teamImage }})" alt="">
                     <span class="team-name">{{ match[0].name }}</span>
                 </div>
                 <div>
@@ -36,7 +36,7 @@
                 </div>
                 <div>
                     <span class="team-name">{{ match[1].name }}</span>
-                    <img ng-src="{{ match[1].teamImage }}" alt="">
+                    <img style="background-image: url({{ match[1].teamImage }})" alt="">
                 </div>
             </li>
         </ul>

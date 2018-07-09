@@ -6,11 +6,12 @@
                      background-image: url({{ $ctrl.data.userProfile.stadiumImage ? 
                                              $ctrl.data.userProfile.stadiumImage : 
                                              $ctrl.stadiumImage }})">
-            <span class="email_coins">
+            <span class="email_coins" ng-if="$ctrl.data.userProfile.objectId">
                 {{$ctrl.data.userProfile.email ? 
                   $ctrl.data.userProfile.email + ', ' + 
                   $ctrl.data.userProfile.coins + '$' : '0$'}}</span>
             <span ng-repeat="row in $ctrl.data.structureConfig"
+                  ng-if="$ctrl.data.userProfile.objectId"
                   class="structure-object {{row[$ctrl.data.userProfile.structureConfig[$index + 1]] ? 'active-bg' : 'disable-bg'}}"
                   title="{{ row[$ctrl.data.userProfile.structureConfig[$index + 1]] ?          row[$ctrl.data.userProfile.structureConfig[$index + 1]].description :
                   row[row.length - 1].description }}"

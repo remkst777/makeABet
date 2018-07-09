@@ -24,10 +24,12 @@ export default class appCtrl {
     */
     
     sessionRelevance() {
+        this.initLoading(null);
         if (!this.cookieService.getCookie(`objectId`)) {
             this.userService.logout();
         } else {
-            this.initLoading();
+            this.userService.getById(`Users`, this.cookieService.getCookie(`objectId`))
+                .then((profile) => this.data.userProfile = profile.data);
         }
     }
     

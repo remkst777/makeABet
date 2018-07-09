@@ -6,7 +6,12 @@ export default class UserService {
 	}
     
     save = (table, obj) => {
-        return Backendless.Data.of(table).save(obj);
+        return Backendless.Data.of(table).save(obj)
+            .then((data) => data)
+            .catch((error) => {
+                alertify.error(error.data && error.data.message ? error.data.message : error.data ? error.data : error ? error.toString() : 'Check Internet connection');
+                return error;
+            })
     }
     
     find = (table, pageSize = 10, offset = 0, sortBy = ``, whereClause = ``) => {
@@ -20,7 +25,7 @@ export default class UserService {
         return this.$http.get(query)
             .then((data) => data)
             .catch((error) => {
-                alertify.error(error.data && error.data.message ? error.data.message : error.data ? error.data : 'Check Internet connection');
+                alertify.error(error.data && error.data.message ? error.data.message : error.data ? error.data : error ? error.toString() : 'Check Internet connection');
                 return error;
             })
     }
@@ -36,7 +41,7 @@ export default class UserService {
                 return data;
             })
             .catch((error) => {
-                alertify.error(error.data && error.data.message ? error.data.message : error.data ? error.data : 'Check Internet connection');
+                alertify.error(error.data && error.data.message ? error.data.message : error.data ? error.data : error ? error.toString() : 'Check Internet connection');
                 return error;
             })
     }
@@ -48,7 +53,7 @@ export default class UserService {
         return this.$http.get(query)
             .then((data) => data)
             .catch((error) => {
-                alertify.error(error.data && error.data.message ? error.data.message : error.data ? error.data : 'Check Internet connection');
+                alertify.error(error.data && error.data.message ? error.data.message : error.data ? error.data : error ? error.toString() : 'Check Internet connection');
                 return error;
             })
     }
@@ -63,7 +68,7 @@ export default class UserService {
                 return data;
             })
             .catch((error) => {
-                alertify.error(error.data && error.data.message ? error.data.message : error.data ? error.data : 'Check Internet connection');
+                alertify.error(error.data && error.data.message ? error.data.message : error.data ? error.data : error ? error.toString() : 'Check Internet connection');
                 return error;
             })
     }
@@ -75,7 +80,7 @@ export default class UserService {
         return this.$http.get(query)
             .then((data) => data)
             .catch((error) => {
-                alertify.error(error.data && error.data.message ? error.data.message : error.data ? error.data : 'Check Internet connection');
+                alertify.error(error.data && error.data.message ? error.data.message : error.data ? error.data : error ? error.toString() : 'Check Internet connection');
                 return error;
             })
     }
@@ -90,7 +95,7 @@ export default class UserService {
                 return data;
             })
             .catch((error) => {
-                alertify.error(error.data && error.data.message ? error.data.message : error.data ? error.data : 'Check Internet connection');
+                alertify.error(error.data && error.data.message ? error.data.message : error.data ? error.data : error ? error.toString() : 'Check Internet connection');
                 return error;
             })
     }

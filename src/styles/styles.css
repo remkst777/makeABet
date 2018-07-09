@@ -269,8 +269,8 @@ li {
     box-shadow: 0 0 4px cyan;
     width: 64px;
     height: 64px;
-    object-fit: contain;
-    background: #FFF;
+    background: #FFF 50% 50% no-repeat;
+    background-size: 70%;
 }
 
 .matches-container .count {

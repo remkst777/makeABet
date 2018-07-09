@@ -5,8 +5,12 @@ class playCtrl {
         this.$mdDialog = $mdDialog;
         this.userService = userService;
         this.cookieService = cookieService;
-        this.userService.getById(`Users`, this.cookieService.getCookie(`objectId`))
-            .then((resp) => this.data.userProfile.coins = resp.data.coins)
+        
+        const objectId = this.cookieService.getCookie(`objectId`);
+        if (objectId) {
+            this.userService.getById(`Users`, objectId)
+                .then((resp) => this.data.userProfile.coins = resp.data.coins)
+        }
     
         this.matches = [];
         this.doCheck = false;
@@ -35,18 +39,21 @@ class playCtrl {
                     };
                     
                     this.calcCount(match);
-                    
-                    $scope.loader = true;
-                    this.$timeout(() => {
-                        this.userService.save(`Users`, {
-                            objectId: this.cookieService.getCookie(`objectId`),
-                            coins: this.data.userProfile.coins
-                        })
-                        .then(() => {
-                            $scope.loader = false;
-                            this.$mdDialog.hide()
-                        });
-                    }, 1000);
+                    if (this.data.userProfile.objectId) {
+                        $scope.loader = true;
+                        this.$timeout(() => {
+                            this.userService.save(`Users`, {
+                                objectId: this.cookieService.getCookie(`objectId`),
+                                coins: this.data.userProfile.coins
+                            })
+                            .then(() => {
+                                $scope.loader = false;
+                                this.$mdDialog.hide();
+                            });
+                        }, 1000);   
+                    } else {
+                        this.$mdDialog.hide();
+                    }
                 }
                 
             },
@@ -61,11 +68,13 @@ class playCtrl {
         const A1 = 1.2 * match[0].attackPower / match[1].defensePower,
               B1 = Math.random()*(2 * A1) - A1,
               C1 = Math.floor(A1 * (A1 + B1/2));
+        
         const A2 = match[1].attackPower / match[0].defensePower,
               B2 = Math.random()*(2 * A2) - A2,
               C2 = Math.floor(A2 * (A2 + B2/2));
-    
+        
         const choice = match.BET.num;
+        
         match.isBetWon = (choice === 1 && C1 > C2 || choice === 2 && C1 === C2 || choice === 3 && C1 < C2) ? true : false;
         match.status = 'Finished';
         match.RESULTS = {

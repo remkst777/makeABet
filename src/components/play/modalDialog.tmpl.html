@@ -1,6 +1,7 @@
 <md-dialog class="modal-window-bg-play">
-    <p style="display: flex; justify-content: flex-end; opacity: {{ loader ? 0 : 1 }}">
-        <strong style="padding-right: 2px">Coins:</strong> {{ data.userProfile.coins }}$
+    <p style="display: flex; justify-content: flex-end; opacity: {{ loader ? 0 : 1 }}"
+       ng-if="data.userProfile.objectId">
+        <strong style="padding-right: 2px">Coins:</strong> {{ data.userProfile.coins | number:2 }}$
     </p>
     <table class="table">
         <thead>
