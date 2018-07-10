@@ -1,5 +1,34 @@
 <div class="wrapper-wrap">  
-    <div class="col-xs-offset-2 col-xs-8">
-        <h3>Statistics</h3>
+    <div class="col-lg-offset-2 col-lg-8 statistics">
+       <table class="table">
+           <thead>
+               <tr>
+                   <td>#</td>
+                   <td ng-repeat="column in $ctrl.columns"
+                       ng-click="$ctrl.orderBy(column.property)">
+                       {{ column.title }}
+                       <span class="sort-by-icon"
+                             ng-show="$ctrl.orderByProp === column.property">
+                           {{ $ctrl.reverseProp ? '&#9206;' : '&#9207' }}
+                       </span>
+                   </td>
+               </tr>
+           </thead>
+           <tbody>
+               <tr ng-repeat="user in $ctrl.data.users | orderBy: $ctrl.orderByProp : $ctrl.reverseProp">
+                   <td>{{ $index + 1 }}</td>
+                   <td ng-repeat="column in $ctrl.columns"
+                       title="{{ user.objectId === $ctrl.objectId ? 'Your profile' : '' }}"
+                       class="{{ user.objectId === $ctrl.objectId ? 'green-personal' : '' }}">
+                       <span ng-if="column.type === 'string'">
+                           {{ user[column.property] }}
+                       </span>
+                       <span ng-if="column.type === 'currency'">
+                           {{ user[column.property] | number:2 }}
+                       </span>
+                   </td>
+               </tr>
+           </tbody>
+       </table>
     </div>
 </div>

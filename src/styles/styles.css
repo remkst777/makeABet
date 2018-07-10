@@ -330,4 +330,21 @@ li {
     color: #32cd32;
 }
 
+.sort-by-icon {
+    font-size: 12px;
+    vertical-align: 2px;
+}
+
+.statistics table td, .statistics table tr {
+    border: 1px solid #FFF;
+    text-align: center;
+    font-size: 15px;
+}
+
+.statistics thead td {
+    height: 50px;
+    vertical-align: middle !important;
+    cursor: pointer;
+}
+
 

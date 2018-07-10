@@ -38,19 +38,25 @@ class playCtrl {
                         gain: sum * match.COEF[num]
                     };
                     
-                    this.calcCount(match);
-                    if (this.data.userProfile.objectId) {
+                    const sumValue = this.calcCount(match),
+                          user = this.data.userProfile;
+                    
+                    if (user.objectId) {
                         $scope.loader = true;
                         this.$timeout(() => {
                             this.userService.save(`Users`, {
                                 objectId: this.cookieService.getCookie(`objectId`),
-                                coins: this.data.userProfile.coins
+                                coins: user.coins,
+                                maxWinBet: (sumValue.win > user.maxWinBet) ? sumValue.win : user.maxWinBet,
+                                maxLoseBet: (sumValue.lose > user.maxLoseBet) ? sumValue.lose : user.maxLoseBet,
+                                betNumber: user.betNumber + 1
                             })
-                            .then(() => {
+                            .then((profile) => {
+                                this.data.userProfile = profile;
                                 $scope.loader = false;
                                 this.$mdDialog.hide();
                             });
-                        }, 1000);   
+                        }, 250);   
                     } else {
                         this.$mdDialog.hide();
                     }
@@ -67,11 +73,11 @@ class playCtrl {
     calcCount(match) {
         const A1 = 1.2 * match[0].attackPower / match[1].defensePower,
               B1 = Math.random()*(2 * A1) - A1,
-              C1 = Math.floor(A1 * (A1 + B1/2));
+              C1 = Math.floor(A1 * (A1 + B1));
         
         const A2 = match[1].attackPower / match[0].defensePower,
               B2 = Math.random()*(2 * A2) - A2,
-              C2 = Math.floor(A2 * (A2 + B2/2));
+              C2 = Math.floor(A2 * (A2 + B2));
         
         const choice = match.BET.num;
         
@@ -84,8 +90,10 @@ class playCtrl {
         
         if (match.isBetWon) {
             this.data.userProfile.coins += Math.floor(match.BET.gain - match.BET.sum);
+            return { win: Math.floor(match.BET.gain - match.BET.sum) };
         } else {
             this.data.userProfile.coins -= Math.floor(match.BET.sum);
+            return { lose: Math.floor(match.BET.sum) };
         }
     }
     
