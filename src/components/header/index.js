@@ -1,6 +1,7 @@
 export default class headerCtrl {
     constructor($scope, $timeout, $location, $mdDialog, userService, cookieService, $window) {
         'ngInject';
+        
         this.$location     = $location;
         this.$mdDialog     = $mdDialog;
         this.userService   = userService;
@@ -11,9 +12,9 @@ export default class headerCtrl {
     }
     
     /**
-     * Param (@tab): 1 - Auth
-     * Param (@tab): 2 - Forget
-     * Param (@tab): 3 - Create
+     * Param (@tab): 1 - Войти
+     * Param (@tab): 2 - Поменять пароль
+     * Param (@tab): 3 - Создать акк.
      */
     
     toLogIn(event) {
@@ -44,6 +45,7 @@ export default class headerCtrl {
                                 $scope.authForm.$submitted = false;
                             } else {
                                 const PERIOD = checkbox ? (3600 * 24 * 365) : 1800;
+                                
                                 this.cookieService.setCookie(`objectId`, `${data.data.objectId}`, PERIOD);
                                 this.data.userProfile = data.data;
                                 this.$window.location.reload();
@@ -86,6 +88,7 @@ export default class headerCtrl {
         this.data = {};
         this.userService.logout();
         this.cookieService.deleteCookie(`objectId`);
+        this.$window.location.reload();
     }
     
     isTabActive(tab) {

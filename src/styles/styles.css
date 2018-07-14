@@ -347,4 +347,11 @@ li {
     cursor: pointer;
 }
 
+.table-button-see-more {
+    display: block;
+    color: #DC143C !important;
+    font-size: 12px;
+    margin: 0 auto;
+}
+
 

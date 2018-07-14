@@ -1,5 +1,4 @@
 import './services/core.module';
-import cookieService from './services/cookieService/cookieService'
 import './components/home';
 import './components/play';
 import './components/about';
@@ -9,10 +8,12 @@ import './components/statistics';
 export default class appCtrl {
     constructor($scope, userService, cookieService) {
         'ngInject';
+        
         $scope.data = {
             userProfile: {},
             structureConfig: {}
         };
+        
         this.cookieService = cookieService;
         this.userService = userService;
         this.data = $scope.data;
@@ -20,7 +21,7 @@ export default class appCtrl {
     }
     
     /**
-    * User session relevance checking
+    * Проверка релевантности пользовательской сессии
     */
     
     sessionRelevance() {
@@ -34,12 +35,13 @@ export default class appCtrl {
     }
     
     /**
-    * Data preload after user's authorization
+    * Подгрузка данных после авторизации
     */
     
     initLoading() {
         this.userService.find(`teams`, 100)
             .then((teams) => this.data.teams = teams.data);
+        
         this.userService.find(`structure`, 100)
             .then((structureConfig) => { 
                 structureConfig.data = _.sortBy(structureConfig.data, (item) => item.level);

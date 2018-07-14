@@ -1,5 +1,6 @@
 <div class="wrapper-wrap">  
     <div class="col-lg-offset-2 col-lg-8 statistics">
+      
        <table class="table">
            <thead>
                <tr>
@@ -9,26 +10,37 @@
                        {{ column.title }}
                        <span class="sort-by-icon"
                              ng-show="$ctrl.orderByProp === column.property">
-                           {{ $ctrl.reverseProp ? '&#9206;' : '&#9207' }}
+                           {{ $ctrl.reverseProp ? '&#9206;' : '&#9207;' }}
                        </span>
                    </td>
                </tr>
            </thead>
+           
            <tbody>
-               <tr ng-repeat="user in $ctrl.data.users | orderBy: $ctrl.orderByProp : $ctrl.reverseProp">
+               <tr class="{{ user.objectId === $ctrl.objectId ? 'active-tab' : '' }}"
+                   ng-repeat="user in $ctrl.data.users | orderBy: $ctrl.orderByProp : $ctrl.reverseProp">
                    <td>{{ $index + 1 }}</td>
                    <td ng-repeat="column in $ctrl.columns"
-                       title="{{ user.objectId === $ctrl.objectId ? 'Your profile' : '' }}"
-                       class="{{ user.objectId === $ctrl.objectId ? 'green-personal' : '' }}">
+                       title="{{ user.objectId === $ctrl.objectId ? 'Your profile' : '' }}">
+                       
                        <span ng-if="column.type === 'string'">
                            {{ user[column.property] }}
                        </span>
                        <span ng-if="column.type === 'currency'">
                            {{ user[column.property] | number:2 }}
                        </span>
+                       
                    </td>
                </tr>
            </tbody>
        </table>
+       
+       <md-button class="md-flat md-primary table-button-see-more"
+                  ng-if="$ctrl.data.users.length % $ctrl.count === 0"
+                  ng-disabled="$ctrl.loader"
+                  ng-click="$ctrl.loadUsers()">
+          {{ $ctrl.loader ? 'Loading...' : 'More' }}
+       </md-button>
+       
     </div>
 </div>

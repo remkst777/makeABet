@@ -2,11 +2,15 @@ class statisticsCtrl {
     constructor(userService, cookieService) {
         'ngInject';
         this.objectId = cookieService.getCookie('objectId');
+        this.userService = userService;
         
         this.orderByProp = 'coins';
         this.reverseProp = true;
         
-        userService.find('Users', 100)
+        this.count = 10;
+        this.offset = 0;
+        
+        userService.find('Users', this.count, this.offset)
             .then((users) => this.data.users = users.data);
         
         this.columns = {
@@ -41,6 +45,17 @@ class statisticsCtrl {
     orderBy(property) {
         this.orderByProp = property;
         this.reverseProp = !this.reverseProp;
+    }
+    
+    loadUsers() {
+        this.offset += this.count;
+        this.loader = true;
+
+        this.userService.find('Users', this.count, this.offset)
+            .then((users) => {
+                this.loader = false;
+                angular.extend(this.data.users, this.data.users.concat(users.data));
+            });
     }
     
     

@@ -1,21 +1,27 @@
 class homeCtrl {
     constructor($scope, $mdDialog, $timeout, userService, cookieService) {
         'ngInject';
+        
         this.$mdDialog = $mdDialog;
         this.$timeout = $timeout;
         this.userService = userService;
         this.cookieService = cookieService;
+        
         this.stadiumImage = 'https://develop.backendless.com/0FC174F8-1D3A-699D-FF9A-12DA40395200/console/utdsmulpcvjuejnwwelckudnjokwqutyygvw/files/view/images/stadiums/stadium88.jpg';
     }
     
     $onInit() {
-        this.data.userProfile.structureConfig = {};
+        if (this.data.userProfile) {
+            this.data.userProfile.structureConfig = {};
+        }
+        
         if (this.cookieService.getCookie(`objectId`)) {
             this.userService.getById(`users`, this.cookieService.getCookie(`objectId`))
                 .then((userProfile) => {
                     userProfile.data.structureConfig = JSON.parse(userProfile.data.structureConfig);
                     angular.extend(this.data.userProfile, userProfile.data);
                 });    
+            
         }
     }
     
@@ -47,9 +53,11 @@ class homeCtrl {
         this.$mdDialog.show(confirm)
             .then(() => { 
                 this.loading = true;
+            
                 if (this.data.userProfile.coins >= row[NEW_LVL].cost) {
                     this.data.userProfile.structureConfig[id] += 1 ;
                     this.data.userProfile.coins -= row[NEW_LVL].cost;
+                    
                     this.userService.save(`Users`, {
                         objectId: this.cookieService.getCookie(`objectId`),
                         structureConfig: JSON.stringify(this.data.userProfile.structureConfig),
