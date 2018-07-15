@@ -18,7 +18,7 @@
            
            <tbody>
                <tr class="{{ user.objectId === $ctrl.objectId ? 'active-tab' : '' }}"
-                   ng-repeat="user in $ctrl.data.users | orderBy: $ctrl.orderByProp : $ctrl.reverseProp">
+                   ng-repeat="user in $ctrl.data.users">
                    <td>{{ $index + 1 }}</td>
                    <td ng-repeat="column in $ctrl.columns"
                        title="{{ user.objectId === $ctrl.objectId ? 'Your profile' : '' }}">

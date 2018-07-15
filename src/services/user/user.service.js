@@ -6,7 +6,10 @@ export default class UserService {
 	}
     
     save = (table, obj) => {
-        return Backendless.Data.of(table).save(obj)
+        let query = ``;
+        query += `${this.backendlessUrl}/data`;
+        query += `/${table}`;
+        return this.$http.put(query, obj)
             .then((data) => data)
             .catch((error) => {
                 alertify.error(error.data && error.data.message ? error.data.message : error.data ? error.data : error ? error.toString() : 'Check Internet connection');

@@ -21,6 +21,7 @@
                   
                   <div>
                       <img ng-src="{{row[$ctrl.data.userProfile.structureConfig[$index + 1] - 1].image}}" alt=""
+                           ng-if="$ctrl.data.userProfile.structureConfig[$index + 1] > 0"
                            style="position: absolute; 
                                   top: {{row[$ctrl.data.userProfile.structureConfig[$index + 1] - 1].yPosition_img}}; 
                                   left: {{row[$ctrl.data.userProfile.structureConfig[$index + 1] - 1].xPosition_img}}">

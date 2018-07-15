@@ -320,6 +320,8 @@ li {
 .modal-window-bg-play table input[type="number"] {
     width: 100px;
     height: 25px;
+    font-size: 13px;
+    margin: -2px 0;
 }
 
 .red-personal {
@@ -333,6 +335,10 @@ li {
 .sort-by-icon {
     font-size: 12px;
     vertical-align: 2px;
+}
+
+.statistics table {
+    margin-top: 20px;
 }
 
 .statistics table td, .statistics table tr {
@@ -352,6 +358,19 @@ li {
     color: #DC143C !important;
     font-size: 12px;
     margin: 0 auto;
+}
+
+.about video {
+    width: 100%;
+    margin: 20px 0;
+}
+
+.about,
+.statistics,
+.head-cmp-center,
+.home,
+.play {
+    min-width: 1000px;
 }
 
 

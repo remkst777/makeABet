@@ -7,10 +7,10 @@ class statisticsCtrl {
         this.orderByProp = 'coins';
         this.reverseProp = true;
         
-        this.count = 10;
+        this.count = 20;
         this.offset = 0;
         
-        userService.find('Users', this.count, this.offset)
+        userService.find('Users', this.count, this.offset, `${this.orderByProp} ${this.reverseProp ? 'desc' : 'asc'}`)
             .then((users) => this.data.users = users.data);
         
         this.columns = {
@@ -45,13 +45,20 @@ class statisticsCtrl {
     orderBy(property) {
         this.orderByProp = property;
         this.reverseProp = !this.reverseProp;
+        this.loader = true;
+        
+        this.userService.find('Users', this.count, 0, `${this.orderByProp} ${this.reverseProp ? 'desc' : 'asc'}`)
+            .then((users) => {
+                this.loader = false;
+                angular.extend(this.data.users, users.data);
+            })
     }
     
     loadUsers() {
         this.offset += this.count;
         this.loader = true;
 
-        this.userService.find('Users', this.count, this.offset)
+        this.userService.find('Users', this.count, this.offset, `${this.orderByProp} ${this.reverseProp ? 'desc' : 'asc'}`)
             .then((users) => {
                 this.loader = false;
                 angular.extend(this.data.users, this.data.users.concat(users.data));

@@ -39,6 +39,9 @@ export default class appCtrl {
     */
     
     initLoading() {
+        this.userService.find('application', 1)
+            .then((app) => this.data.video = app.data[0].video);
+        
         this.userService.find(`teams`, 100)
             .then((teams) => this.data.teams = teams.data);
         
